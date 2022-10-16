@@ -9,8 +9,8 @@ export class BoardController {
   constructor(private readonly boardService: BoardService) {}
 
   @Post()
-  create(@Body() createBoardDto: CreateBoardDto) {
-    return this.boardService.create(createBoardDto);
+  createBoard(@Body() createBoardDto: CreateBoardDto) :Promise<any> {
+    return this.boardService.createBoard(createBoardDto);
   }
 
   @Get()

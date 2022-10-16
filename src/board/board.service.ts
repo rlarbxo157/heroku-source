@@ -10,8 +10,15 @@ import { Repository } from 'typeorm';
 export class BoardService {
   constructor(@InjectRepository(Board) private boardRepository: Repository<Board>){}
   
-  create(createBoardDto: CreateBoardDto) {
-    return 'This action adds a new board';
+  async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+    const {title, description} = createBoardDto;
+    const board = this.boardRepository.create({
+      title,
+      description,
+    })
+
+    await this.boardRepository.save(board);
+    return board;
   }
 
   findAll() {
